@@ -72,7 +72,6 @@ namespace CovidSpreadSimulator
                             toInfect--;
                             if (toInfect == 0 && numberOfNotInfected > 0) // om det är den sista som ska infekteras behövs inte loopen köras längre
                             {
-                                person.isInfected = true;
                                 break;
                             }
                         }
