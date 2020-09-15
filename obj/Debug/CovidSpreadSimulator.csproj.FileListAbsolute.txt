@@ -1,0 +1,7 @@
+C:\Users\Robin\source\repos\CovidSpreadSimulator\bin\Debug\CovidSpreadSimulator.exe.config
+C:\Users\Robin\source\repos\CovidSpreadSimulator\bin\Debug\CovidSpreadSimulator.exe
+C:\Users\Robin\source\repos\CovidSpreadSimulator\bin\Debug\CovidSpreadSimulator.pdb
+C:\Users\Robin\source\repos\CovidSpreadSimulator\obj\Debug\CovidSpreadSimulator.csprojAssemblyReference.cache
+C:\Users\Robin\source\repos\CovidSpreadSimulator\obj\Debug\CovidSpreadSimulator.csproj.CoreCompileInputs.cache
+C:\Users\Robin\source\repos\CovidSpreadSimulator\obj\Debug\CovidSpreadSimulator.exe
+C:\Users\Robin\source\repos\CovidSpreadSimulator\obj\Debug\CovidSpreadSimulator.pdb
