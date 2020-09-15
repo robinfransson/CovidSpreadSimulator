@@ -41,12 +41,9 @@ namespace CovidSpreadSimulator
             int hoursPassed = 0;
             while (numberOfImmune < 50)
             {
-                var Infected = persons.Where(x => x.isInfected);
-                int numberOfInfected = Infected.Count(); // hur många som är infekterade
-                var selectImmune = persons.Where(x => x.immune);
-                numberOfImmune = selectImmune.Count(); // hur många som är immuna
-                var notInfected = persons.Where(x => !x.isInfected);
-                int numberOfNotInfected = notInfected.Count();// hur många som inte är infekterade
+                int numberOfInfected = persons.Where(x => x.isInfected).Count(); // hur många som är infekterade
+                numberOfImmune = persons.Where(x => x.immune).Count(); // hur många som är immuna
+                int numberOfNotInfected = persons.Where(x => !x.isInfected).Count();// hur många som inte är infekterade
                 toInfect = numberOfInfected; // här sätts variabeln för hur många som ska infekteras nästa loop
                 foreach (var person in persons)
                 {
@@ -58,12 +55,7 @@ namespace CovidSpreadSimulator
                     }
                     if (!person.immune) // om personen inte är immun
                     {
-                        if (toInfect == 0 && numberOfNotInfected > 0) // om det är den sista som ska infekteras behövs inte loopen köras längre
-                        {
-                            person.isInfected = true;
-                            break;
-                        }
-                        else if (person.CanSpreadDisease())
+                        if (person.CanSpreadDisease())
                         {
                             if (person.infectedHours > 3) // efter 4 timmar blir personen immun
                             {
@@ -78,6 +70,11 @@ namespace CovidSpreadSimulator
                         {                                                     //personer som kan infektera denna loop 
                             person.isInfected = true;
                             toInfect--;
+                            if (toInfect == 0 && numberOfNotInfected > 0) // om det är den sista som ska infekteras behövs inte loopen köras längre
+                            {
+                                person.isInfected = true;
+                                break;
+                            }
                         }
 
                     }
