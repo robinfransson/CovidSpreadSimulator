@@ -48,7 +48,6 @@ namespace CovidSpreadSimulator
                 foreach (var person in persons)
                 {
                     //Console.WriteLine("{0}, {1}",person.iteration, person.infectedHours);
-                    Thread.Sleep(50);
                     if (toInfect > numberOfNotInfected) // om det är fler att infektera än vad det är icke infekterade sätts variablen till antalet icke infekterade
                     {
                         toInfect = numberOfNotInfected;
@@ -83,7 +82,7 @@ namespace CovidSpreadSimulator
                 Console.Clear();
                 Console.WriteLine($"{hoursPassed} hours has passed, there are {numberOfInfected-numberOfImmune} infected among us, {numberOfImmune}" +
                     $" people are immune.\nThere are {numberOfNotInfected} people not infected");
-                Thread.Sleep(50);
+                Thread.Sleep(200);
             }
             Console.ReadLine();
         }
