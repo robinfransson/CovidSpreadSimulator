@@ -47,11 +47,14 @@ namespace CovidSpreadSimulator
             while (numberOfImmune < 50)
             {
 
-                int numberOfInfected = persons.Count(x => x.isInfected); // hur många som är infekterade
-                numberOfImmune = persons.Count(x => x.immune); // hur många som är immuna
-                int numberOfNotInfected = persons.Count(x => !x.isInfected);// hur många som inte är infekterade
+                int numberOfInfected = persons.Count(x => x.IsInfected); // hur många som är infekterade
+                numberOfImmune = persons.Count(x => x.Immune); // hur många som är immuna
+                int numberOfNotInfected = persons.Count(x => !x.IsInfected);// hur många som inte är infekterade
                 toInfect = numberOfInfected; // här sätts variabeln för hur många som ska infekteras nästa loop
-
+                Console.Clear();
+                Console.WriteLine($"{hoursPassed} hours has passed, there are {numberOfInfected - numberOfImmune} infected among us, {numberOfImmune}" +
+                    $" people are immune.\nThere are {numberOfNotInfected} people not infected");
+                Thread.Sleep(200);
 
                 foreach (var person in persons)
                 {
@@ -59,7 +62,7 @@ namespace CovidSpreadSimulator
                     {
                         toInfect = numberOfNotInfected;
                     }
-                    if (person.immune) //om personen är immun ska nästa iteration påbörjas
+                    if (person.Immune) //om personen är immun ska nästa iteration påbörjas
                     {
                         continue;
                     }
@@ -67,16 +70,16 @@ namespace CovidSpreadSimulator
                     {
                         if (CheckInfectedHours(person) == 4) // efter 4 timmar blir personen immun
                         {
-                            person.immune = true;
+                            person.Immune = true;
                         }
                         else
                         {
-                            person.infectedHours++;
+                            person.InfectedHours++;
                         }
                     }
                     else if (!person.CanSpreadDisease() && toInfect >= 1) // om personen inte kan sprida sjukdom ska personen bli infekterad om det finns kvar 
                     {                                                     //personer som kan infektera denna loop 
-                        person.isInfected = true;
+                        person.IsInfected = true;
                         toInfect--;
                         if (toInfect == 0 && numberOfNotInfected > 0) // om det är den sista som ska infekteras behövs inte loopen köras längre
                         {
@@ -85,42 +88,15 @@ namespace CovidSpreadSimulator
                     }
                 }
                 hoursPassed++;
-                Console.Clear();
-                Console.WriteLine($"{hoursPassed} hours has passed, there are {numberOfInfected - numberOfImmune} infected among us, {numberOfImmune}" +
-                    $" people are immune.\nThere are {numberOfNotInfected} people not infected");
-                Thread.Sleep(200);
+                
             }
             Console.ReadLine();
         }
 
         static int CheckInfectedHours(Person p)
         {
-            return p.infectedHours;
+            return p.InfectedHours;
         }
     }
-    class Person
-    {
-        public int iteration;
-        public bool isInfected;
-        public int infectedHours;
-        public bool immune;
 
-
-        public Person(bool infected, bool immune, int id)
-        {
-            this.immune = immune;
-            this.isInfected = infected;
-            this.infectedHours = 0;
-            this.iteration = id;
-        }
-
-        public bool CanSpreadDisease() // om personen är infekterad och inte immun kan den sprida sjukdom
-        {
-            if (this.isInfected == true && !this.immune)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
 }
